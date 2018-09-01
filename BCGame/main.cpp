@@ -1,15 +1,20 @@
+/* This is console executable, that makes use of the BullCow class.
+This acts as the view in a MVC pattern, and is responsible for all user interactions.
+For game logic see FBullCowGame class.*/
 #include <iostream>
 #include <string>
 #include "FBullCowGame.h"
 
+using FText = std::string;
+using int32 = int;
 
 void PrintIntro();
 void PlayGame();
-std::string GetGuess();
-void Feedback(std::string Guess, int CurrentTry, int MaxTries);
+FText GetGuess();
+void Feedback(FText Guess, int32 CurrentTry, int32 MaxTries);
 bool AskToPlayAgain();
 
-//TODO Rid off this public class
+//TODO Rid off this public initialisation
 FBullCowGame BCGame; // instantiate a new game
 
 int main()
@@ -24,7 +29,7 @@ int main()
 //Game introduction
 void PrintIntro()
 {
-	constexpr int WORD_LENGTH = 5;
+	constexpr int32 WORD_LENGTH = 5;
 	std::cout << "Welcome to Bulls & Cows game" << std::endl;
 	std::cout << "Can you guess the " << WORD_LENGTH << " letter isogram I'm thiking of?\n" << std::endl;
 	return;
@@ -36,9 +41,9 @@ void PlayGame()
 	do
 	{
 		BCGame.Reset();
-		int MaxTries = BCGame.GetMaxTries();
-		int CurrentTry = BCGame.GetCurrentTry();
-		std::string Guess = "";
+		int32 MaxTries = BCGame.GetMaxTries();
+		int32 CurrentTry = BCGame.GetCurrentTry();
+		FText Guess = "";
 
 		//TODO change the loop to while after adding the guess validation
 		for (CurrentTry; CurrentTry <= MaxTries; CurrentTry++)
@@ -55,10 +60,10 @@ void PlayGame()
 }
 
 //Get a guess from the user
-std::string GetGuess()
+FText GetGuess()
 {
-	std::string Guess = "";
-	int CurrentTry = BCGame.GetCurrentTry();
+	FText Guess = "";
+	int32 CurrentTry = BCGame.GetCurrentTry();
 
 	std::cout << "Try " << CurrentTry << ". Enter your guess: ";
 	std::getline(std::cin, Guess);
@@ -67,7 +72,7 @@ std::string GetGuess()
 
 //TODO Change for real feedback and maybe get rid off these function and send it to class
 //Repeat his guess
-void Feedback(std::string Guess, int CurrentTry, int MaxTries)
+void Feedback(FText Guess, int32 CurrentTry, int32 MaxTries)
 {
 	//TODO Print number of bulls and cows
 	std::cout << "Your guess was: " << Guess << std::endl;
@@ -78,7 +83,7 @@ void Feedback(std::string Guess, int CurrentTry, int MaxTries)
 
 bool AskToPlayAgain()
 {
-	std::string Response = "";
+	FText Response = "";
 	std::cout << "Do you want to play again? (y/n) ";
 	std::getline(std::cin, Response);
 

@@ -3,8 +3,8 @@
 
 FBullCowGame::FBullCowGame() { Reset(); }
 
-int FBullCowGame::GetMaxTries() const { return MyMaxTries; }
-int FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
+int32 FBullCowGame::GetMaxTries() const { return MyMaxTries; }
+int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
 
 bool FBullCowGame::IsGameWon() const
 {
@@ -14,16 +14,34 @@ bool FBullCowGame::IsGameWon() const
 void FBullCowGame::Reset()
 {
 	MyCurrentTry = 1;
+
+	const int32 MAX_TRIES = 8;
 	MyMaxTries = MAX_TRIES;
+
+	const FString HIDDEN_WORD = "planet";
+	MyHiddenWord = HIDDEN_WORD;
 	return;
 }
 
-bool FBullCowGame::CheckGuessValidity(std::string)
+bool FBullCowGame::CheckGuessValidity(FString)
 {
 	return false;
 }
 
-std::string FBullCowGame::ChooseTheWord()
+FString FBullCowGame::ChooseTheWord()
 {
-	return std::string();
+	return FString();
+}
+
+//receives a valid guess, increments turn and returns count
+BullCowCount FBullCowGame::SubmitGuess(FString)
+{
+	// increment the turn number
+	MyCurrentTry++;
+	// setup a return variable
+	BullCowCount BullCowCount;
+	// loop through all letters
+		// compare letters against hidden word
+
+	return BullCowCount;
 }
